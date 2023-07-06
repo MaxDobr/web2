@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" class = "light">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px
+        }
+
+        .form-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        input[type=submit] {
+            width: 100%;
+            height: 30px;
+            color: white;
+            font-weight: bold;
+            background-color: blue;
+        }
+
+
+        input[type=text] {
+            width: 200px;
+            height: 40px;
+            background-color: #fff;
+            border-width: 1px;
+        }
+
+        input[type=submit]:hover {
+            cursor: pointer;
+            background-color: dodgerblue;
+        }
+
+        input[type=submit]:active {
+            background-color: #000;
+
+        }
+
+        .input-error {
+            border-color: red;
+        }
+
+        .error-message {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            width: 200px;
+            color: red;
+            font-size: 12px;
+            font-style: italic;
+
+        }
+
+        html.light {
+            --color-bg: #fff;
+            --color-fc: #000;
+
+        }
+
+        html.dark {
+            --color-bg: #000;
+            --color-fc: #fff;
+
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-fc);
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+
+<div class="container">
+
+
+    <div class="theme">
+        <label for="radio-black">Dark</label>
+        <input type="radio" name="driver" id="radio-black" />
+        <label for="radio-white">Light</label>
+        <input type="radio" name="driver" id="radio-white" checked>
+    </div>
+
+    <h1>Регистрация</h1>
+
+    <h3>(*) помечены поля обязательные для заполнения</h3>
+
+    <form>
+
+
+        <div class="form-input" id="name-input-container">
+            <input type="text" id = "name-input" placeholder="Имя"/>
+        </div>
+
+
+        <div class="form-input" id="surname-input-container">
+            <input type="text" id = "surname-input" placeholder="Фамилия"/>
+        </div>
+
+
+        <div class="form-input">
+            <input type="text" id="e-mail" placeholder="Почта(*)"/>
+        </div>
+
+        <div class="form-input">
+            <input type="text" id="password-input" placeholder="Пароль(*)"/>
+        </div>
+
+        <div class="form-input">
+            <label for="user-type-input">Select user type</label>
+            <select id="user-type-input">
+                <option value="Admin">Admin</option>
+                <option value="Moder">Moder</option>
+                <option value="User">User</option>
+            </select>
+
+
+        </div>
+
+        <input type="submit" value="Регистрация"/>
+
+        <div class="form-input">
+            <label for="name-input">Уже есть аккаунт?</label>
+            <input type="submit" value="Войти"/>
+            <h3>или</h3>
+            <input type="submit" value="Google"/>
+
+        </div>
+
+
+
+    </form>
+
+</div>
+
+<script type = "text/javascript">
+    const nameInput = document.querySelector("#name-input");
+
+    let inputValue;
+
+    nameInput.addEventListener("input", () => {
+        inputValue = nameInput.value
+        console.log(inputValue);
+    })
+
+    nameInput.addEventListener("blur", () => {
+        if (!inputValue || inputValue.length < 4) {
+            nameInput.className = "input-error";
+
+        }
+    })
+
+
+    document.querySelector('.theme').addEventListener("change", (event) => {
+        if (event.target.nodeName === "INPUT") {
+            document.documentElement.classList.remove('light', 'dark');
+            document.documentElement.classList.add(event.target.value);
+
+        }
+
+    });
+
+</script>
+
+<div id = "root"> </div>
+</body>
+
+</html>
